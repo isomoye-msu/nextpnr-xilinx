@@ -7,3 +7,5 @@
 [submodule "xilinx/external/nextpnr-xilinx-meta"]
 	path = xilinx/external/nextpnr-xilinx-meta
 	url = https://github.com/openxc7/nextpnr-xilinx-meta
+[submodule "xilinx/external/prjxray-db/"]
+	branch = master
