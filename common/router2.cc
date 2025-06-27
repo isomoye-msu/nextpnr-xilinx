@@ -1369,8 +1369,10 @@ struct Router2
                         net.max_crit = std::max(net.max_crit, c);
                     }
                 }
+                log_info("Running main router loop...3\n");
                 std::stable_sort(route_queue.begin(), route_queue.end(),
                                  [&](int na, int nb) { return nets.at(na).max_crit > nets.at(nb).max_crit; });
+             log_info("Running main router loop...4\n");                    
             }
 
 #if 0
