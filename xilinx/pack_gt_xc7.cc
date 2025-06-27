@@ -128,6 +128,7 @@ void XC7Packer::pack_gt()
 
     for (auto &cell : ctx->cells) {
         CellInfo *ci = cell.second.get();
+        log_info("Packing Gigabit Transceivers..2\n");
 
         if (ci->type == id_GTPE2_COMMON || ci->type == id_GTXE2_COMMON) {
             all_plls.push_back(ci);
@@ -138,6 +139,7 @@ void XC7Packer::pack_gt()
             std::string gt_type = is_gtp ? "GTP" : "GTX";
 
             fold_inverter(ci, "DRPCLK");
+            log_info("Packing Gigabit Transceivers..3\n");
             if (is_gtp) {
                 fold_inverter(ci, "PLL0LOCKDETCLK");
                 fold_inverter(ci, "PLL1LOCKDETCLK");
@@ -153,7 +155,7 @@ void XC7Packer::pack_gt()
                 fold_inverter(ci, "QPLLPMASCANCLK1");
                 */
             }
-
+            log_info("Packing Gigabit Transceivers..4\n");
             for (auto &port : ci->ports) {
                 auto port_name = port.first.str(ctx);
                 auto port_net  = port.second.net;
