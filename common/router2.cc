@@ -1328,10 +1328,15 @@ struct Router2
         log_info("Running router2...\n");
         log_info("Setting up routing resources...\n");
         auto rstart = std::chrono::high_resolution_clock::now();
+        log_info("Setting up routing resources...1\n");
         setup_nets();
+        log_info("Setting up routing resources...2\n");
         setup_wires();
+        log_info("Setting up routing resources...3\n");
         find_all_reserved_wires();
+        log_info("Setting up routing resources...4\n");
         partition_nets();
+        log_info("Setting up routing resources...5\n");
         curr_cong_weight = cfg.init_curr_cong_weight;
         hist_cong_weight = cfg.hist_cong_weight;
         ThreadContext st;
