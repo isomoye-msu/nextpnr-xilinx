@@ -1346,7 +1346,7 @@ struct Router2
             route_queue.push_back(i);
 
         timing_driven = ctx->setting<bool>("timing_driven");
-        log_info("Running main router loop...\n");
+        log_info("Running main router loop test...\n");
         do {
             ctx->sorted_shuffle(route_queue);
 
@@ -1354,11 +1354,13 @@ struct Router2
                 // Heuristic: reduce runtime by skipping STA in the case of a "long tail" of a few
                 // congested nodes
                 get_criticalities(ctx, &net_crit);
+                log_info("Running main router loop...1\n");
                 for (auto n : route_queue) {
                     IdString name = nets_by_udata.at(n)->name;
                     auto fnd = net_crit.find(name);
                     auto &net = nets.at(n);
                     net.max_crit = 0;
+                    log_info("Running main router loop...2\n");
                     if (fnd == net_crit.end())
                         continue;
                     for (int i = 0; i < int(fnd->second.criticality.size()); i++) {
