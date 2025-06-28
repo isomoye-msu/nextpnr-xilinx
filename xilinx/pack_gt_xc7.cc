@@ -304,7 +304,7 @@ void XC7Packer::pack_gt()
             for (auto &port : ci->ports) {
                 log_info("Packing Gigabit Transceivers..for loop\n");
                 auto port_name = port.first.str(ctx);
-                log_info("Packing Gigabit Transceivers..empty\n");
+                log_info("Packing Gigabit Transceivers..empty :%s\n",port_name);
                 auto net = get_net_or_empty(ci, port.first);
                 log_info("Packing Gigabit Transceivers..net\n");
 
