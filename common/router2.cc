@@ -1382,8 +1382,11 @@ struct Router2
                     log("    routed %d/%d\n", int(j), int(route_queue.size()));
             }
 #endif
+            log_info("Running main router loop...5\n");   
             do_route();
+            log_info("Running main router loop...6\n");   
             route_queue.clear();
+            log_info("Running main router loop...7\n");   
             update_congestion();
 #if 0
             if (iter == 1 && ctx->debug) {
