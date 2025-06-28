@@ -222,6 +222,7 @@ void XC7Packer::pack_gt()
             }
             ci->setParam(ctx->id("_BOTH_GTREFCLK_USED"), Property(refclk0_used && refclk1_used));
         } else if (ci->type == id_GTPE2_CHANNEL) {
+            log_info("Packing Gigabit Transceivers..2\n");
             fold_inverter(ci, "CLKRSVD0");
             fold_inverter(ci, "CLKRSVD1");
             fold_inverter(ci, "CPLLLOCKDETCLK");
@@ -278,6 +279,7 @@ void XC7Packer::pack_gt()
                 }
             }
         } else if (ci->type == id_GTXE2_CHANNEL) {
+            log_info("Packing Gigabit Transceivers..channel\n");
             fold_inverter(ci, "CLKRSVD0");
             fold_inverter(ci, "CLKRSVD1");
             fold_inverter(ci, "CPLLLOCKDETCLK");
@@ -300,6 +302,7 @@ void XC7Packer::pack_gt()
             fold_inverter(ci, "TXUSRCLK2");
 
             for (auto &port : ci->ports) {
+                log_info("Packing Gigabit Transceivers..for loop\n");
                 auto port_name = port.first.str(ctx);
                 auto net = get_net_or_empty(ci, port.first);
 
