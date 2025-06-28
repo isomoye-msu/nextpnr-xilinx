@@ -305,37 +305,46 @@ void XC7Packer::pack_gt()
                 log_info("Packing Gigabit Transceivers..for loop\n");
                 auto port_name = port.first.str(ctx);
                 auto net = get_net_or_empty(ci, port.first);
+                log_info("Packing Gigabit Transceivers..net\n");
 
                 // If one of the clock ports is tied, then Vivado just disconnects them
                 if (net != nullptr && ((boost::starts_with(port_name, "PLL") && boost::ends_with(port_name, "CLK")) ||
                                        boost::contains(port_name, "REFCLK")) &&
                                        !boost::contains(port_name, "CLKMONITOR") &&
                                        !boost::contains(port_name, "CLKLOST")) {
+                    log_info("Packing Gigabit Transceivers..nullptr\n");
                     if (net->name == ctx->id("$PACKER_GND_NET") || net->name == ctx->id("$PACKER_VCC_NET")) {
                         disconnect_port(ctx, ci, port.first);
                         continue;
                     }
+                    log_info("Packing Gigabit Transceivers..7\n");
                     auto driver = net->driver.cell;
                     if (driver->type != id_GTXE2_COMMON)
                         log_error("The clock port '%s' of the GTXE2_CHANNEL instance %s can only be driven "
                                     "by the clock ouputs of a GTXE2_COMMON instance, but not %s\n",
                                     port_name.c_str(), ci->name.c_str(ctx), driver->type.c_str(ctx));
+                    log_info("Packing Gigabit Transceivers..for loop 3\n");
                     auto drv_port = net->driver.port.str(ctx);
                     auto port_prefix = port_name.substr(0, 4);
                     auto port_suffix = port_name.substr(4);
+                    log_info("Packing Gigabit Transceivers..for loop 5\n");
                     if (!boost::starts_with(drv_port, port_prefix) || !boost::ends_with(drv_port, port_suffix))
                         log_error("The port %s of a GTXE2_CHANNEL instance can only be connected to the port %sOUT%s "
                                     "of a GTXE2_COMMON instance, but not to %s.\n", port_name.c_str(), port_prefix.c_str(), port_suffix.c_str(),
                                     drv_port.c_str());
                     // These ports are hardwired. Disconnect
+                    log_info("Packing Gigabit Transceivers..for loop 6\n");
                     disconnect_port(ctx, ci, port.first);
                 }
+                log_info("Packing Gigabit Transceivers..for loop 7\n");
 
                 if (boost::contains(port_name, "[") && boost::contains(port_name, "]")) {
+                    log_info("Packing Gigabit Transceivers..for loop 8 \n");
                     auto new_port_name = std::string(port_name);
                     boost::replace_all(new_port_name, "[", "");
                     boost::replace_all(new_port_name, "]", "");
                     rename_port(ctx, ci, ctx->id(port_name), ctx->id(new_port_name));
+                    log_info("Packing Gigabit Transceivers..for loop 9 \n");
                 }
             }
         }    }
